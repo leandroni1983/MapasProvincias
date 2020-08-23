@@ -59,5 +59,5 @@ def home():
 
 
 h=mapas(provinciasurl,localidadesurl)
-app.run(host="localhost")
-
+#app.run(host="localhost")
+if __name__ == "__name__": app.run()
