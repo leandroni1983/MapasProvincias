@@ -12,26 +12,26 @@ class mapas():
         self.urlprovincias = provinciasurl
         self.urllocalidades = localidadesurl
         
-    def get(self,url):
+    def getdata(self,url):
         with urlopen(url) as resource:
             return json.load(resource)
 
     def getmapaprovincias(self):
         self.lista = []
-        for item in self.get(self.urlprovincias):
+        for item in self.getdata(self.urlprovincias):
             self.lista.append([item['nombre'],item['centroide']['lat'],item['centroide']['lon'],item['id']])
         return self.lista
 
     def getmapalocalidades(self,id):
         self.lista = []
-        for item in self.get(self.urllocalidades):
+        for item in self.getdata(self.urllocalidades):
             if item['provincia_id'] == id: 
                 self.lista.append([item['localidad_nombre'],float(item['localidad_centroide_lat']),float(item['localidad_centroide_lon']),item['provincia_id']])
         return self.lista
 
     def getlocalidad(self,nombre):
         self.lista = []
-        for item in self.get(self.urllocalidades):
+        for item in self.getdata(self.urllocalidades):
             if nombre.lower() in item['localidad_nombre'].lower():
                 self.lista.append([item['localidad_nombre'],float(item['localidad_centroide_lat']),float(item['localidad_centroide_lon']),item['provincia_id']])
         return self.lista
@@ -59,5 +59,6 @@ def home():
 
 
 h=mapas(provinciasurl,localidadesurl)
+
 #app.run(host="localhost")
 if __name__ == "__name__": app.run()
