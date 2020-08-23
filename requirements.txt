@@ -2,4 +2,3 @@ Flask
 gunicorn
 Jinja2
 bson
-urllib
